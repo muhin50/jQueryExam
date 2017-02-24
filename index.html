@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <title>jQuery validation login basic example</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+   <meta name="viewport" content="width=device-width"/>
+   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+<!-- <script type="text/javascript" src="main.js"></script> -->
+   <script>
+      //Configuration
+         var minUserLen = 5, maxUserLen = 40;
+         var minPassLen = 8, maxPassLen = 40;
+         var usernameMsg = "Username must be between " + minUserLen + " and " +
+                           maxUserLen + " characters, inclusive.";
+         var passwordMsg = "Password must be between " + minPassLen + " and " +
+                           maxPassLen + " characters, inclusive.";
+         jQuery.validator.setDefaults({
+            debug: true,      //Avoids form submit. Comment when in production.
+            success: "valid",
+            submitHandler: function() {
+               window.location.href = "profile.html";
+            }
+         });
+      $(document).ready(function() {
+         // validate signup form on keyup and submit
+         $("#loginForm").validate({
+            rules: {
+               username: {
+                  required: true,
+                  minlength: minUserLen,
+                  maxlength: maxUserLen
+ 
+               },
+               password: {
+                  required: true,
+                  minlength: minPassLen,
+                  maxlength: maxPassLen
+ 
+               },
+            },
+            messages: {
+               username: {
+                  required: "Username required",
+                  minlength: usernameMsg,
+                  maxlength: usernameMsg
+               },
+               password: {
+                  required: "Password required",
+                  minlength: passwordMsg,
+                  maxlength: passwordMsg
+               }
+            }
+         });
+          $(".btn9").click(function(){
+              $("#username,#password").val("");
+          });
+      });
+   </script>
+   <style>
+   body{background-color: #679B00;}
+
+    fieldset{text-align: center;margin-top: 15%;background-color: #FF4040;}
+   </style>
+   </head>
+<body>
+ 
+   <form id="loginForm">
+      <fieldset>
+         <h1>MY PROFILE LOGIN PAGE</h1>
+         <p>
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text">
+         </p>
+         <p>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password">
+         </p>
+         <p>
+            <input class="submit" type="submit" value="Submit"><button class="btn9">Reset</button>
+         </p>
+      </fieldset>
+   </form>
+    </body>
+</html>
